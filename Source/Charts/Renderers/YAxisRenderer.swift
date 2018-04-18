@@ -133,7 +133,6 @@ open class YAxisRenderer: AxisRendererBase
             else { return }
         
         let labelFont = yAxis.labelFont
-        let labelTextColor = yAxis.labelTextColor
         
         let from = yAxis.isDrawBottomYLabelEntryEnabled ? 0 : 1
         let to = yAxis.isDrawTopYLabelEntryEnabled ? yAxis.entryCount : (yAxis.entryCount - 1)
@@ -141,6 +140,15 @@ open class YAxisRenderer: AxisRendererBase
         for i in stride(from: from, to: to, by: 1)
         {
             let text = yAxis.getFormattedLabel(i)
+            var labelTextColor = yAxis.labelTextColor
+            
+            if i >= 0 && i <= 2 {
+                labelTextColor = UIColor(red: 194/255, green: 39/255, blue: 47/255, alpha: 1)
+            } else if i >= 3 && i <= 6 {
+                labelTextColor = UIColor(red: 252/255, green: 185/255, blue: 19/255, alpha: 1)
+            } else {
+                labelTextColor = UIColor(red: 1/255, green: 105/255, blue: 68/255, alpha: 1)
+            }
             
             ChartUtils.drawText(
                 context: context,
